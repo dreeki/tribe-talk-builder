@@ -1,20 +1,23 @@
 package part5RealWorldExamples;
 
+import java.time.LocalTime;
+
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO: creatie van Timeframe volgens business logica (starttijd + duration)
-		// TODO: creatie van Timeframe vanuit persistentie laag (starttijd + eindtijd)
+		Duration duration = Duration.builder().hours(1).minutes(10).build();
 
-		// TODO: User with 2 required fields, but interchangeable order
-//		User user = User.builder()
-//				.firstName("Andreas")
-//				.lastName("De Witte")
-//				.build();
+		TimeFrame timeFramePersistence = TimeFrame.builder().start(LocalTime.now()).end(LocalTime.now().plusHours(1)).build();
+		TimeFrame timeFrameDomain = TimeFrame.builder().start(LocalTime.now()).duration(duration).build();
 
-//		User userDifferentOrder = User.builder()
-//				.lastName("De Witte")
-//				.firstName("Andreas")
-//				.build();
+		User user = User.builder()
+				.firstName("Andreas")
+				.lastName("De Witte")
+				.build();
+
+		User userDifferentOrder = User.builder()
+				.lastName("De Witte")
+				.firstName("Andreas")
+				.build();
 	}
 }

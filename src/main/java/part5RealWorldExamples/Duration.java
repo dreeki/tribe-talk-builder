@@ -44,26 +44,45 @@ public class Duration {
 				'}';
 	}
 
-	// TODO: make hours required and minutes optional in builder
-	public static class DurationBuilder {
+	public static Hours builder() {
+		return new DurationBuilder();
+	}
+
+	public static class DurationBuilder implements Hours, MinutesBuild, Build {
 		private int hours;
 		private int minutes;
 
 		private DurationBuilder() {
 		}
 
+		@Override
 		public DurationBuilder hours(int hours) {
 			this.hours = hours;
 			return this;
 		}
 
+		@Override
 		public DurationBuilder minutes(int minutes) {
 			this.minutes = minutes;
 			return this;
 		}
 
+		@Override
 		public Duration build() {
 			return new Duration(this);
 		}
+	}
+
+	interface Hours {
+		MinutesBuild hours(int hours);
+	}
+
+	interface MinutesBuild {
+		Build minutes(int minutes);
+		Duration build();
+	}
+
+	interface Build {
+		Duration build();
 	}
 }

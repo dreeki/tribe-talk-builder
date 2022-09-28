@@ -17,11 +17,11 @@ public class User {
 		return lastName;
 	}
 
-	public static FirstName builder() {
+	public static FirstAndLastName builder() {
 		return new UserBuilder();
 	}
 
-	public static class UserBuilder implements FirstName, LastName, Build {
+	public static class UserBuilder implements FirstAndLastName, FirstName, LastName, Build {
 		private String firstName;
 		private String lastName;
 
@@ -46,8 +46,13 @@ public class User {
 		}
 	}
 
-	interface FirstName {
+	interface FirstAndLastName {
 		LastName firstName(String firstName);
+		FirstName lastName(String lastName);
+	}
+
+	interface FirstName {
+		Build firstName(String firstName);
 	}
 
 	interface LastName {
